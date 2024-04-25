@@ -6,6 +6,47 @@ import java.util.Scanner;
 
 public class SmartLightClient {
     public static void main(String[] args) {
+        // Create a scanner for user input
+        Scanner scanner = new Scanner(System.in);
+
+        boolean exitService = false;
+
+        while (!exitService) {
+            System.out.println("Welcome to the Smart Light Service!");
+            System.out.println("Select an option:");
+            System.out.println("1. Perform Smart Light actions");
+            System.out.println("2. Quit the service");
+            System.out.print("Enter the number corresponding to your choice: ");
+
+            // Read the user's choice
+            int serviceChoice;
+            if (scanner.hasNextInt()) {
+                serviceChoice = scanner.nextInt();
+                scanner.nextLine(); // Consume newline character
+            } else {
+                System.out.println("Invalid input. Please enter a number.");
+                scanner.nextLine(); // Clear invalid input
+                continue;
+            }
+
+            switch (serviceChoice) {
+                case 1:
+                    // Perform Smart Light actions
+                    performSmartLightActions();
+                    break;
+                case 2:
+                    // Quit the service
+                    exitService = true;
+                    break;
+                default:
+                    System.out.println("Invalid choice. Please enter 1 or 2.");
+            }
+        }
+
+        System.out.println("Thank you for using the Smart Light Service!");
+    }
+
+    private static void performSmartLightActions() {
         // Create a channel to the server
         ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090)
                 .usePlaintext()
@@ -47,10 +88,13 @@ public class SmartLightClient {
             String workspace = null;
             while (workspace == null) {
                 System.out.println("Select a workspace:");
-                System.out.println("1. Conference Room");
-                System.out.println("2. Meeting Room");
-                System.out.println("3. Server Room");
-                System.out.println("4. Cafeteria");
+                System.out.println("1. Conference Room Dublin");
+                System.out.println("2. Conference Room Cork");
+                System.out.println("3. Conference Room Galway");
+                System.out.println("4. Meeting Room Limerick");
+                System.out.println("5. Meeting Room Waterford");
+                System.out.println("6. Server Room");
+                System.out.println("7. Cafeteria");
                 System.out.print("Enter the number corresponding to the workspace: ");
 
                 // Read the user's workspace choice
@@ -65,19 +109,28 @@ public class SmartLightClient {
                 // Map the user's choice to the workspace name
                 switch (workspaceChoice) {
                     case 1:
-                        workspace = "Conference Room";
+                        workspace = "Conference Room Dublin";
                         break;
                     case 2:
-                        workspace = "Meeting Room";
+                        workspace = "Conference Room Cork";
                         break;
                     case 3:
-                        workspace = "Server Room";
+                        workspace = "Conference Room Galway";
                         break;
                     case 4:
+                        workspace = "Meeting Room Limerick";
+                        break;
+                    case 5:
+                        workspace = "Meeting Room Waterford";
+                        break;
+                    case 6:
+                        workspace = "Server Room";
+                        break;
+                    case 7:
                         workspace = "Cafeteria";
                         break;
                     default:
-                        System.out.println("Invalid choice. Please enter a number between 1 and 4.");
+                        System.out.println("Invalid choice. Please enter a number between 1 and 7.");
                 }
             }
 

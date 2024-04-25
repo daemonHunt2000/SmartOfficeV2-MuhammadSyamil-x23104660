@@ -74,8 +74,11 @@ public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
 
     // Validate workspace
     private boolean isValidWorkspace(String workspaceId) {
-        return workspaceId.equals("Conference Room") ||
-                workspaceId.equals("Meeting Room") ||
+        return workspaceId.equals("Conference Room Dublin") ||
+                workspaceId.equals("Conference Room Cork") ||
+                workspaceId.equals("Conference Room Galway") ||
+                workspaceId.equals("Meeting Room Limerick") ||
+                workspaceId.equals("Meeting Room Waterford") ||
                 workspaceId.equals("Server Room") ||
                 workspaceId.equals("Cafeteria");
     }

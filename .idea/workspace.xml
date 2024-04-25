@@ -4,18 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/proto/smartlight.proto" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/test/java/com/example/smartoffice/AppTest.java" afterDir="false" />
+    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Smart Light service working">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -44,6 +36,9 @@
     &quot;accountId&quot;: &quot;6dc747f9-63dc-444e-8a2d-15cf4d743801&quot;
   }
 }</component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
   <component name="ProjectColorInfo">{
   &quot;associatedIndex&quot;: 0
 }</component>
@@ -97,8 +92,18 @@
       <workItem from="1713951285237" duration="704000" />
       <workItem from="1713952005186" duration="170000" />
       <workItem from="1713952187557" duration="419000" />
-      <workItem from="1713952618674" duration="328000" />
+      <workItem from="1713952618674" duration="970000" />
+      <workItem from="1713980811294" duration="4598000" />
     </task>
+    <task id="LOCAL-00001" summary="Smart Light service working">
+      <option name="closed" value="true" />
+      <created>1713953047406</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1713953047406</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -106,6 +111,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
+    <MESSAGE value="Smart Light service working" />
+    <option name="LAST_COMMIT_MESSAGE" value="Smart Light service working" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
