@@ -3,10 +3,10 @@ package com.example.smartoffice;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
-import com.example.smartoffice.LightRequest;
-import com.example.smartoffice.LightResponse;
-import com.example.smartoffice.TurnOnWithUserInputRequest;
-import com.example.smartoffice.TurnOffWithUserInputRequest;
+// import com.example.smartoffice.LightRequest;
+// import com.example.smartoffice.LightResponse;
+// import com.example.smartoffice.TurnOnWithUserInputRequest;
+// import com.example.smartoffice.TurnOffWithUserInputRequest;
 
 public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
 

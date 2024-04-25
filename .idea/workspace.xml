@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Smart Light service working">
+    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -93,7 +93,8 @@
       <workItem from="1713952005186" duration="170000" />
       <workItem from="1713952187557" duration="419000" />
       <workItem from="1713952618674" duration="970000" />
-      <workItem from="1713980811294" duration="4598000" />
+      <workItem from="1713980811294" duration="4766000" />
+      <workItem from="1714033406257" duration="543000" />
     </task>
     <task id="LOCAL-00001" summary="Smart Light service working">
       <option name="closed" value="true" />
@@ -103,7 +104,15 @@
       <option name="project" value="LOCAL" />
       <updated>1713953047406</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start">
+      <option name="closed" value="true" />
+      <created>1714008271173</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1714008271173</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -112,7 +121,8 @@
   <component name="VcsManagerConfiguration">
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Smart Light service working" />
-    <option name="LAST_COMMIT_MESSAGE" value="Smart Light service working" />
+    <MESSAGE value="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start" />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
