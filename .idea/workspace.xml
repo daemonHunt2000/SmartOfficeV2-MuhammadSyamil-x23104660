@@ -4,10 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start">
+    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Updated the maven url within the pom.xml file to a more secure https link. Also made the four imports in the SmartLightServiceImpl.java into comments since it is not being used.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/BookingDetails.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/proto/roombooking.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -94,7 +95,8 @@
       <workItem from="1713952187557" duration="419000" />
       <workItem from="1713952618674" duration="970000" />
       <workItem from="1713980811294" duration="4766000" />
-      <workItem from="1714033406257" duration="543000" />
+      <workItem from="1714033406257" duration="5720000" />
+      <workItem from="1714061486485" duration="12709000" />
     </task>
     <task id="LOCAL-00001" summary="Smart Light service working">
       <option name="closed" value="true" />
@@ -112,7 +114,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714008271173</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Updated the maven url within the pom.xml file to a more secure https link. Also made the four imports in the SmartLightServiceImpl.java into comments since it is not being used.">
+      <option name="closed" value="true" />
+      <created>1714034135651</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1714034135651</updated>
+    </task>
+    <option name="localTasksCounter" value="4" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -122,16 +132,7 @@
     <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
     <MESSAGE value="Smart Light service working" />
     <MESSAGE value="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start" />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/target/classes/com/example/smartoffice/SmartLightGrpc.class</url>
-          <option name="timeStamp" value="1" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="Updated the maven url within the pom.xml file to a more secure https link. Also made the four imports in the SmartLightServiceImpl.java into comments since it is not being used." />
+    <option name="LAST_COMMIT_MESSAGE" value="Updated the maven url within the pom.xml file to a more secure https link. Also made the four imports in the SmartLightServiceImpl.java into comments since it is not being used." />
   </component>
 </project>

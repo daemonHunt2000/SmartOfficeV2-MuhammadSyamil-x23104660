@@ -1,0 +1,49 @@
+syntax = "proto3";
+
+package com.example.smartoffice;
+
+option java_multiple_files = true;
+option java_package = "com.example.smartoffice";
+option java_outer_classname = "RoomBookingProto";
+
+service RoomBooking {
+  rpc BookRoom(BookRoomRequest) returns (BookRoomResponse) {}
+  rpc CancelBooking(CancelBookingRequest) returns (CancelBookingResponse) {}
+  rpc ViewBooking(ViewBookingRequest) returns (ViewBookingResponse) {}
+}
+
+message BookRoomRequest {
+  string room_type = 1;
+  string date = 2;
+  string start_time = 3;
+  string end_time = 4;
+  string employee_name = 5;
+  string employee_id = 6;
+}
+
+message BookRoomResponse {
+  string booking_id = 1;
+  string message = 2;
+}
+
+message CancelBookingRequest {
+  string booking_id = 1;
+}
+
+message CancelBookingResponse {
+  string message = 1;
+}
+
+message ViewBookingRequest {
+  string booking_id = 1;
+}
+
+message ViewBookingResponse {
+  string room_type = 1;
+  string date = 2;
+  string start_time = 3;
+  string end_time = 4;
+  string employee_name = 5;
+  string employee_id = 6;
+  string message = 7;
+}
