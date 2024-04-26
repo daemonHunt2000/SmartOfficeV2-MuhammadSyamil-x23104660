@@ -4,7 +4,7 @@ package com.example.smartoffice;
  * Represents the details of a room booking.
  */
 public class BookingDetails {
-    private final String roomType; // Type of the room (e.g., Conference Room, Meeting Room)
+    private final String roomType; // Type of room to be booked (e.g., Conference Room, Meeting Room)
     private final String date; // Date of the booking
     private final String startTime; // Start time of the booking
     private final String endTime; // End time of the booking
@@ -13,7 +13,7 @@ public class BookingDetails {
 
     /**
      * Constructs a new BookingDetails object with the given parameters.
-     * @param roomType The type of the room (e.g., Conference Room, Meeting Room)
+     * @param roomType The type of the room to be booked (e.g., Conference Room, Meeting Room)
      * @param date The date of the booking
      * @param startTime The start time of the booking
      * @param endTime The end time of the booking
@@ -30,7 +30,7 @@ public class BookingDetails {
     }
 
     /**
-     * Gets the type of the room.
+     * Gets the type of room.
      * @return The type of the room
      */
     public String getRoomType() {

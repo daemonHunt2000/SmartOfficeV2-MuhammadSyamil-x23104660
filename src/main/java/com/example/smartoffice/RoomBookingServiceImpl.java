@@ -118,7 +118,7 @@ public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase 
 
     // Method to validate the booking time
     private boolean isValidTime(String startTime, String endTime) {
-        // Implement your validation logic here
+
         // For now, assuming all times are valid
         return true;
     }

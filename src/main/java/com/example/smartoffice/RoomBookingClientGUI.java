@@ -8,22 +8,22 @@ import javafx.geometry.Insets;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.layout.GridPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+// import java.time.LocalTime;
+import java.util.Arrays;
+import java.util.List;
 
 public class RoomBookingClientGUI extends Application {
 
     private RoomBookingGrpc.RoomBookingBlockingStub stub;
     private ManagedChannel channel;
-    private TextField roomTypeField;
-    private TextField dateField;
-    private TextField startTimeField;
-    private TextField endTimeField;
-    private TextField employeeNameField;
-    private TextField employeeIdField;
-    private TextField cancelBookingIdField;
-    private TextField viewBookingIdField;
     private TextArea outputArea;
+
+    // Room types
+    private enum RoomType {CONFERENCE_ROOM, MEETING_ROOM}
 
     @Override
     public void start(Stage primaryStage) {
@@ -41,78 +41,14 @@ public class RoomBookingClientGUI extends Application {
         grid.setHgap(10);
         grid.setVgap(10);
 
-        // Room Booking Section
-        Label roomBookingLabel = new Label("Room Booking Service");
-        roomBookingLabel.setStyle("-fx-font-weight: bold");
-        grid.add(roomBookingLabel, 0, 0, 2, 1);
+        // Add UI components for room booking options
+        addRoomBookingOptions(grid);
 
-        roomTypeField = new TextField();
-        roomTypeField.setPromptText("Room Type");
-        grid.add(new Label("Room Type:"), 0, 1);
-        grid.add(roomTypeField, 1, 1);
-
-        dateField = new TextField();
-        dateField.setPromptText("Date (YYYY-MM-DD)");
-        grid.add(new Label("Date:"), 0, 2);
-        grid.add(dateField, 1, 2);
-
-        startTimeField = new TextField();
-        startTimeField.setPromptText("Start Time (HH:MM)");
-        grid.add(new Label("Start Time:"), 0, 3);
-        grid.add(startTimeField, 1, 3);
-
-        endTimeField = new TextField();
-        endTimeField.setPromptText("End Time (HH:MM)");
-        grid.add(new Label("End Time:"), 0, 4);
-        grid.add(endTimeField, 1, 4);
-
-        employeeNameField = new TextField();
-        employeeNameField.setPromptText("Your Name");
-        grid.add(new Label("Your Name:"), 0, 5);
-        grid.add(employeeNameField, 1, 5);
-
-        employeeIdField = new TextField();
-        employeeIdField.setPromptText("Your Employee ID");
-        grid.add(new Label("Your Employee ID:"), 0, 6);
-        grid.add(employeeIdField, 1, 6);
-
-        Button bookRoomButton = new Button("Book Room");
-        bookRoomButton.setOnAction(e -> bookRoom());
-        grid.add(bookRoomButton, 0, 7, 2, 1);
-
-        // Cancel Booking Section
-        Label cancelBookingLabel = new Label("Cancel Booking");
-        cancelBookingLabel.setStyle("-fx-font-weight: bold");
-        grid.add(cancelBookingLabel, 0, 8, 2, 1);
-
-        cancelBookingIdField = new TextField();
-        cancelBookingIdField.setPromptText("Booking ID to Cancel");
-        grid.add(new Label("Booking ID to Cancel:"), 0, 9);
-        grid.add(cancelBookingIdField, 1, 9);
-
-        Button cancelBookingButton = new Button("Cancel Booking");
-        cancelBookingButton.setOnAction(e -> cancelBooking());
-        grid.add(cancelBookingButton, 0, 10, 2, 1);
-
-        // View Booking Details Section
-        Label viewBookingLabel = new Label("View Booking Details");
-        viewBookingLabel.setStyle("-fx-font-weight: bold");
-        grid.add(viewBookingLabel, 0, 11, 2, 1);
-
-        viewBookingIdField = new TextField();
-        viewBookingIdField.setPromptText("Booking ID to View");
-        grid.add(new Label("Booking ID to View:"), 0, 12);
-        grid.add(viewBookingIdField, 1, 12);
-
-        Button viewBookingButton = new Button("View Booking");
-        viewBookingButton.setOnAction(e -> viewBookingDetails());
-        grid.add(viewBookingButton, 0, 13, 2, 1);
-
-        // Output Area
+        // Add output area
         outputArea = new TextArea();
         outputArea.setEditable(false);
         outputArea.setPrefRowCount(10);
-        grid.add(outputArea, 0, 14, 2, 1);
+        grid.add(outputArea, 0, 6, 2, 1);
 
         // Create the scene and set it on the stage
         Scene scene = new Scene(grid);
@@ -124,19 +60,148 @@ public class RoomBookingClientGUI extends Application {
         primaryStage.setOnCloseRequest(event -> channel.shutdown());
     }
 
+    private void addRoomBookingOptions(GridPane grid) {
+        // Room Booking Section
+        Label roomBookingLabel = new Label("Room Booking Service");
+        roomBookingLabel.setStyle("-fx-font-weight: bold");
+        grid.add(roomBookingLabel, 0, 0, 2, 1);
+
+        // Create a dropdown menu for room booking options
+        ComboBox<String> bookingOptions = new ComboBox<>();
+        bookingOptions.getItems().addAll("Book a Room", "View Booking Details", "Exit the Service");
+        bookingOptions.setValue("Select an option");
+        grid.add(new Label("Select Option:"), 0, 1);
+        grid.add(bookingOptions, 1, 1);
+
+        // Add action listener to the dropdown menu
+        bookingOptions.setOnAction(event -> {
+            String selectedOption = bookingOptions.getSelectionModel().getSelectedItem();
+            if (selectedOption != null) {
+                switch (selectedOption) {
+                    case "Book a Room":
+                        bookRoom();
+                        break;
+                    case "View Booking Details":
+                        viewBookingDetails();
+                        break;
+                    case "Exit the Service":
+                        // Close the application
+                        channel.shutdown();
+                        System.exit(0);
+                        break;
+                }
+            }
+        });
+    }
+
     private void bookRoom() {
-        // Get input values
-        String roomType = roomTypeField.getText().trim();
-        String date = dateField.getText().trim();
-        String startTime = startTimeField.getText().trim();
-        String endTime = endTimeField.getText().trim();
-        String employeeName = employeeNameField.getText().trim();
-        String employeeId = employeeIdField.getText().trim();
+        // Room type selection
+        List<String> roomTypes = Arrays.asList("Conference Room", "Meeting Room");
+        ChoiceDialog<String> roomTypeDialog = new ChoiceDialog<>(roomTypes.get(0), roomTypes);
+        roomTypeDialog.setTitle("Room Type Selection");
+        roomTypeDialog.setHeaderText("Select Room Type:");
+        roomTypeDialog.setContentText("Choose room type:");
+
+        // Get the selected room type
+        String selectedRoomType = roomTypeDialog.showAndWait().orElse(null);
+        if (selectedRoomType == null) {
+            return; // User canceled the dialog
+        }
+
+        // Date and time selection
+        LocalDate currentDate = LocalDate.now();
+        DatePicker datePicker = new DatePicker();
+        datePicker.setValue(currentDate);
+        datePicker.setDayCellFactory(datePicker1 -> new DateCell() {
+            @Override
+            public void updateItem(LocalDate item, boolean empty) {
+                super.updateItem(item, empty);
+                setDisable(item.getDayOfWeek() == DayOfWeek.SATURDAY || item.getDayOfWeek() == DayOfWeek.SUNDAY
+                        || item.isBefore(currentDate));
+            }
+        });
+
+        ComboBox<String> startTimeComboBox = new ComboBox<>();
+        ComboBox<String> endTimeComboBox = new ComboBox<>();
+        for (int i = 9; i <= 18; i++) {
+            startTimeComboBox.getItems().add(i + ":00");
+            endTimeComboBox.getItems().add(i + ":00");
+        }
+
+        // Create a dialog for date and time selection
+        GridPane dateTimeGrid = new GridPane();
+        dateTimeGrid.setHgap(10);
+        dateTimeGrid.setVgap(10);
+        dateTimeGrid.add(new Label("Date:"), 0, 0);
+        dateTimeGrid.add(datePicker, 1, 0);
+        dateTimeGrid.add(new Label("Start Time:"), 0, 1);
+        dateTimeGrid.add(startTimeComboBox, 1, 1);
+        dateTimeGrid.add(new Label("End Time:"), 0, 2);
+        dateTimeGrid.add(endTimeComboBox, 1, 2);
+
+        Dialog<String> dateTimeDialog = new Dialog<>();
+        dateTimeDialog.setTitle("Date and Time Selection");
+        dateTimeDialog.getDialogPane().setContent(dateTimeGrid);
+
+        // Add buttons to the dialog
+        ButtonType bookButton = new ButtonType("Book", ButtonBar.ButtonData.OK_DONE);
+        dateTimeDialog.getDialogPane().getButtonTypes().addAll(bookButton, ButtonType.CANCEL);
+
+        // Wait for user input
+        dateTimeDialog.setResultConverter(dialogButton -> {
+            if (dialogButton == bookButton) {
+                LocalDate selectedDate = datePicker.getValue();
+                String startTime = startTimeComboBox.getValue();
+                String endTime = endTimeComboBox.getValue();
+
+                if (startTime == null || endTime == null || selectedDate == null) {
+                    showErrorDialog("Invalid Selection", "Please select a date and time.");
+                    return null;
+                }
+
+                // Perform validation
+                return selectedDate.toString() + ";" + startTime + ";" + endTime;
+            }
+            return null;
+        });
+
+        String dateTimeResult = dateTimeDialog.showAndWait().orElse(null);
+        if (dateTimeResult == null) {
+            return; // User canceled the dialog or input was invalid
+        }
+
+        String[] dateTimeParts = dateTimeResult.split(";");
+        LocalDate selectedDate = LocalDate.parse(dateTimeParts[0]);
+        String startTime = dateTimeParts[1];
+        String endTime = dateTimeParts[2];
+
+        // Employee details input
+        TextInputDialog employeeNameDialog = new TextInputDialog();
+        employeeNameDialog.setTitle("Employee Name");
+        employeeNameDialog.setHeaderText("Enter Your Name:");
+        employeeNameDialog.setContentText("Name:");
+
+        String employeeName = employeeNameDialog.showAndWait().orElse(null);
+        if (employeeName == null || !employeeName.matches("[a-zA-Z ]+")) {
+            showErrorDialog("Invalid Input", "Please enter a valid name (letters and spaces only).");
+            return;
+        }
+
+        TextInputDialog employeeIdDialog = new TextInputDialog();
+        employeeIdDialog.setTitle("Employee ID");
+        employeeIdDialog.setHeaderText("Enter Your Employee ID:");
+        employeeIdDialog.setContentText("Employee ID:");
+
+        String employeeId = employeeIdDialog.showAndWait().orElse(null);
+        if (employeeId == null || !employeeId.matches("[A-Za-z]\\d{8}")) {
+            showErrorDialog("Invalid Input", "Please enter a valid employee ID (e.g., x01234567).");
+            return;
+        }
 
         // Create a request message
         BookRoomRequest request = BookRoomRequest.newBuilder()
-                .setRoomType(roomType)
-                .setDate(date)
+                .setRoomType(selectedRoomType)
+                .setDate(selectedDate.toString())
                 .setStartTime(startTime)
                 .setEndTime(endTime)
                 .setEmployeeName(employeeName)
@@ -146,34 +211,28 @@ public class RoomBookingClientGUI extends Application {
         try {
             // Call the RPC and get the response
             BookRoomResponse response = stub.bookRoom(request);
-            outputArea.appendText("Booking ID: " + response.getBookingId() + "\n");
-            outputArea.appendText("Message: " + response.getMessage() + "\n");
+            if (response != null) {
+                outputArea.appendText("Booking ID: " + response.getBookingId() + "\n");
+                outputArea.appendText("Message: " + response.getMessage() + "\n");
+            } else {
+                showErrorDialog("Booking Failed", "Failed to book the room. Please try again later.");
+            }
         } catch (StatusRuntimeException e) {
-            outputArea.appendText("RPC failed: " + e.getStatus() + "\n");
-        }
-    }
-
-    private void cancelBooking() {
-        // Get booking ID to cancel
-        String bookingId = cancelBookingIdField.getText().trim();
-
-        // Create a request message
-        CancelBookingRequest request = CancelBookingRequest.newBuilder()
-                .setBookingId(bookingId)
-                .build();
-
-        try {
-            // Call the RPC and get the response
-            CancelBookingResponse response = stub.cancelBooking(request);
-            outputArea.appendText("Message: " + response.getMessage() + "\n");
-        } catch (StatusRuntimeException e) {
-            outputArea.appendText("RPC failed: " + e.getStatus() + "\n");
+            showErrorDialog("Server Error", "Failed to communicate with the server. Please provide a valid booking ID (case sensitive).");
         }
     }
 
     private void viewBookingDetails() {
-        // Get booking ID to view details
-        String bookingId = viewBookingIdField.getText().trim();
+        // Get booking ID from user input
+        TextInputDialog dialog = new TextInputDialog();
+        dialog.setTitle("View Booking Details");
+        dialog.setHeaderText("Enter Booking ID:");
+        dialog.setContentText("Booking ID (case sensitive):");
+
+        String bookingId = dialog.showAndWait().orElse(null);
+        if (bookingId == null || bookingId.isEmpty()) {
+            return; // User canceled the dialog or input was empty
+        }
 
         // Create a request message
         ViewBookingRequest request = ViewBookingRequest.newBuilder()
@@ -183,16 +242,28 @@ public class RoomBookingClientGUI extends Application {
         try {
             // Call the RPC and get the response
             ViewBookingResponse response = stub.viewBooking(request);
-            outputArea.appendText("Room Type: " + response.getRoomType() + "\n");
-            outputArea.appendText("Date: " + response.getDate() + "\n");
-            outputArea.appendText("Start Time: " + response.getStartTime() + "\n");
-            outputArea.appendText("End Time: " + response.getEndTime() + "\n");
-            outputArea.appendText("Employee Name: " + response.getEmployeeName() + "\n");
-            outputArea.appendText("Employee ID: " + response.getEmployeeId() + "\n");
-            outputArea.appendText("Message: " + response.getMessage() + "\n");
+            if (response != null) {
+                outputArea.appendText("Room Type: " + response.getRoomType() + "\n");
+                outputArea.appendText("Date: " + response.getDate() + "\n");
+                outputArea.appendText("Start Time: " + response.getStartTime() + "\n");
+                outputArea.appendText("End Time: " + response.getEndTime() + "\n");
+                outputArea.appendText("Employee Name: " + response.getEmployeeName() + "\n");
+                outputArea.appendText("Employee ID: " + response.getEmployeeId() + "\n");
+                outputArea.appendText("Message: " + response.getMessage() + "\n");
+            } else {
+                showErrorDialog("Booking Details Not Found", "No booking found with the provided ID.");
+            }
         } catch (StatusRuntimeException e) {
-            outputArea.appendText("RPC failed: " + e.getStatus() + "\n");
+            showErrorDialog("Server Error", "Failed to communicate with the server. Please provide a valid booking ID (case sensitive).");
         }
+    }
+
+    private void showErrorDialog(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
     }
 
     public static void main(String[] args) {

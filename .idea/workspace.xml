@@ -4,12 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Got the Implementation class for the Room Booking Service running with no errors. roombooking.proto is working fine in generating the necessary java classes. BookingDetails.java was created to store details of room bookings.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingClientGUI.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
+    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Made substantial amount of changes to the RoomBookingClientGUI in order to accommodate a Java GUI (Still a work in progress because I omitted a few other functions when the output was still terminal based). Also created a module&#10;to have JavaFX modules run with the client.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/BookingDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/BookingDetails.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingClientGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,6 +38,9 @@
     &quot;accountId&quot;: &quot;6dc747f9-63dc-444e-8a2d-15cf4d743801&quot;
   }
 }</component>
+  <component name="HighlightingSettingsPerFile">
+    <setting file="jar://$PROJECT_DIR$/../../../../Program Files/Java/jdk-21/lib/src.zip!/java.base/java/time/format/DateTimeFormatter.java" root0="SKIP_INSPECTION" />
+  </component>
   <component name="ProblemsViewState">
     <option name="selectedTabId" value="CurrentFile" />
   </component>
@@ -65,7 +67,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
     "kotlin-language-version-configured": "true",
-    "last_opened_file_path": "D:/Version 4 - Room Booking/SmartOfficeV2",
+    "last_opened_file_path": "D:/Version 6 - Room Booking/SmartOfficeV2",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
@@ -114,7 +116,7 @@
       <workItem from="1714152232166" duration="848000" />
       <workItem from="1714153143160" duration="255000" />
       <workItem from="1714153409012" duration="613000" />
-      <workItem from="1714154033516" duration="5871000" />
+      <workItem from="1714154033516" duration="20007000" />
     </task>
     <task id="LOCAL-00001" summary="Smart Light service working">
       <option name="closed" value="true" />
@@ -148,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714077518217</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="Made substantial amount of changes to the RoomBookingClientGUI in order to accommodate a Java GUI (Still a work in progress because I omitted a few other functions when the output was still terminal based). Also created a module&#10;to have JavaFX modules run with the client.">
+      <option name="closed" value="true" />
+      <created>1714160233434</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1714160233434</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -160,6 +170,7 @@
     <MESSAGE value="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start" />
     <MESSAGE value="Updated the maven url within the pom.xml file to a more secure https link. Also made the four imports in the SmartLightServiceImpl.java into comments since it is not being used." />
     <MESSAGE value="Got the Implementation class for the Room Booking Service running with no errors. roombooking.proto is working fine in generating the necessary java classes. BookingDetails.java was created to store details of room bookings." />
-    <option name="LAST_COMMIT_MESSAGE" value="Got the Implementation class for the Room Booking Service running with no errors. roombooking.proto is working fine in generating the necessary java classes. BookingDetails.java was created to store details of room bookings." />
+    <MESSAGE value="Made substantial amount of changes to the RoomBookingClientGUI in order to accommodate a Java GUI (Still a work in progress because I omitted a few other functions when the output was still terminal based). Also created a module&#10;to have JavaFX modules run with the client." />
+    <option name="LAST_COMMIT_MESSAGE" value="Made substantial amount of changes to the RoomBookingClientGUI in order to accommodate a Java GUI (Still a work in progress because I omitted a few other functions when the output was still terminal based). Also created a module&#10;to have JavaFX modules run with the client." />
   </component>
 </project>
