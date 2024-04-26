@@ -4,11 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Updated the maven url within the pom.xml file to a more secure https link. Also made the four imports in the SmartLightServiceImpl.java into comments since it is not being used.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/BookingDetails.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServiceImpl.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/proto/roombooking.proto" afterDir="false" />
+    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Got the Implementation class for the Room Booking Service running with no errors. roombooking.proto is working fine in generating the necessary java classes. BookingDetails.java was created to store details of room bookings.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingClientGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -19,6 +20,7 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="Class" />
+        <option value="module-info" />
       </list>
     </option>
   </component>
@@ -51,26 +53,35 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent">{
-  &quot;keyToString&quot;: {
-    &quot;ASKED_ADD_EXTERNAL_FILES&quot;: &quot;true&quot;,
-    &quot;Application.SmartLightClient.executor&quot;: &quot;Run&quot;,
-    &quot;Application.SmartLightServer.executor&quot;: &quot;Run&quot;,
-    &quot;Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor&quot;: &quot;Run&quot;,
-    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
-    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
-    &quot;kotlin-language-version-configured&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
-    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
-    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
-    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
-    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
-    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
-    &quot;project.structure.proportion&quot;: &quot;0.0&quot;,
-    &quot;project.structure.side.proportion&quot;: &quot;0.0&quot;,
-    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
+    "Application.RoomBookingClient.executor": "Run",
+    "Application.RoomBookingClientGUI.executor": "Run",
+    "Application.RoomBookingServer.executor": "Run",
+    "Application.SmartLightClient.executor": "Run",
+    "Application.SmartLightServer.executor": "Run",
+    "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "git-widget-placeholder": "master",
+    "kotlin-language-version-configured": "true",
+    "last_opened_file_path": "D:/Version 4 - Room Booking/SmartOfficeV2",
+    "node.js.detected.package.eslint": "true",
+    "node.js.detected.package.tslint": "true",
+    "node.js.selected.package.eslint": "(autodetect)",
+    "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
+    "project.structure.last.edited": "Modules",
+    "project.structure.proportion": "0.15",
+    "project.structure.side.proportion": "0.38980716",
+    "vue.rearranger.settings.migration": "true"
   }
-}</component>
+}]]></component>
+  <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="C:\Users\Syamil\Desktop\SmartOfficeV2\src\test\java\com\example\smartoffice" />
+    </key>
+  </component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -97,6 +108,13 @@
       <workItem from="1713980811294" duration="4766000" />
       <workItem from="1714033406257" duration="5720000" />
       <workItem from="1714061486485" duration="12709000" />
+      <workItem from="1714077365587" duration="795000" />
+      <workItem from="1714135254756" duration="6832000" />
+      <workItem from="1714150535804" duration="1572000" />
+      <workItem from="1714152232166" duration="848000" />
+      <workItem from="1714153143160" duration="255000" />
+      <workItem from="1714153409012" duration="613000" />
+      <workItem from="1714154033516" duration="5871000" />
     </task>
     <task id="LOCAL-00001" summary="Smart Light service working">
       <option name="closed" value="true" />
@@ -122,7 +140,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714034135651</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="Got the Implementation class for the Room Booking Service running with no errors. roombooking.proto is working fine in generating the necessary java classes. BookingDetails.java was created to store details of room bookings.">
+      <option name="closed" value="true" />
+      <created>1714077518217</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1714077518217</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,6 +159,7 @@
     <MESSAGE value="Smart Light service working" />
     <MESSAGE value="Updated the number and names of workspaces and included the option for the user to exit the Smart Light Service client at the start" />
     <MESSAGE value="Updated the maven url within the pom.xml file to a more secure https link. Also made the four imports in the SmartLightServiceImpl.java into comments since it is not being used." />
-    <option name="LAST_COMMIT_MESSAGE" value="Updated the maven url within the pom.xml file to a more secure https link. Also made the four imports in the SmartLightServiceImpl.java into comments since it is not being used." />
+    <MESSAGE value="Got the Implementation class for the Room Booking Service running with no errors. roombooking.proto is working fine in generating the necessary java classes. BookingDetails.java was created to store details of room bookings." />
+    <option name="LAST_COMMIT_MESSAGE" value="Got the Implementation class for the Room Booking Service running with no errors. roombooking.proto is working fine in generating the necessary java classes. BookingDetails.java was created to store details of room bookings." />
   </component>
 </project>
