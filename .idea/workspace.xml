@@ -4,15 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Finally was able to make the Room Booking Service work. Had to simplify the service to just 3 functions after implementing the JavaFX GUI with appropriate validation checks. Tried to tidy up the codes in RoomBookingServiceImpl.java but after omitting a few lines, the client wasn't able to book new rooms so I just left those codes in eventhough they are redundant.">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Tidied up the codes for both the Smart Light Service &amp; Room Booking Service as well as adding comments. Also updated the types of workspaces in the Room Booking Service files to reflect the ones in the other two services. Also updated the Smart Light Client to have a JavaFX GUI.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartTemperatureControlServer.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/TemperatureControlClientGUI.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/main/proto/SmartTemperatureControl.proto" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/BookingDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/BookingDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingClientGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -22,8 +18,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Class" />
         <option value="module-info" />
+        <option value="Class" />
       </list>
     </option>
   </component>
@@ -67,6 +63,8 @@
     "Application.RoomBookingServer.executor": "Run",
     "Application.SmartLightClient.executor": "Run",
     "Application.SmartLightServer.executor": "Run",
+    "Application.SmartTemperatureControlServer.executor": "Run",
+    "Application.TemperatureControlClientGUI.executor": "Run",
     "Maven. [org.apache.maven.plugins:maven-archetype-plugin:RELEASE:generate].executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master",
@@ -122,7 +120,7 @@
       <workItem from="1714153409012" duration="613000" />
       <workItem from="1714154033516" duration="20321000" />
       <workItem from="1714387139214" duration="1856000" />
-      <workItem from="1714569922720" duration="17323000" />
+      <workItem from="1714569922720" duration="22528000" />
     </task>
     <task id="LOCAL-00001" summary="Smart Light service working">
       <option name="closed" value="true" />
@@ -172,7 +170,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714175948395</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Tidied up the codes for both the Smart Light Service &amp; Room Booking Service as well as adding comments. Also updated the types of workspaces in the Room Booking Service files to reflect the ones in the other two services. Also updated the Smart Light Client to have a JavaFX GUI.">
+      <option name="closed" value="true" />
+      <created>1714591503015</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1714591503015</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -186,6 +192,7 @@
     <MESSAGE value="Got the Implementation class for the Room Booking Service running with no errors. roombooking.proto is working fine in generating the necessary java classes. BookingDetails.java was created to store details of room bookings." />
     <MESSAGE value="Made substantial amount of changes to the RoomBookingClientGUI in order to accommodate a Java GUI (Still a work in progress because I omitted a few other functions when the output was still terminal based). Also created a module&#10;to have JavaFX modules run with the client." />
     <MESSAGE value="Finally was able to make the Room Booking Service work. Had to simplify the service to just 3 functions after implementing the JavaFX GUI with appropriate validation checks. Tried to tidy up the codes in RoomBookingServiceImpl.java but after omitting a few lines, the client wasn't able to book new rooms so I just left those codes in eventhough they are redundant." />
-    <option name="LAST_COMMIT_MESSAGE" value="Finally was able to make the Room Booking Service work. Had to simplify the service to just 3 functions after implementing the JavaFX GUI with appropriate validation checks. Tried to tidy up the codes in RoomBookingServiceImpl.java but after omitting a few lines, the client wasn't able to book new rooms so I just left those codes in eventhough they are redundant." />
+    <MESSAGE value="Tidied up the codes for both the Smart Light Service &amp; Room Booking Service as well as adding comments. Also updated the types of workspaces in the Room Booking Service files to reflect the ones in the other two services. Also updated the Smart Light Client to have a JavaFX GUI." />
+    <option name="LAST_COMMIT_MESSAGE" value="Tidied up the codes for both the Smart Light Service &amp; Room Booking Service as well as adding comments. Also updated the types of workspaces in the Room Booking Service files to reflect the ones in the other two services. Also updated the Smart Light Client to have a JavaFX GUI." />
   </component>
 </project>

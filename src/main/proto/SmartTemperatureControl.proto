@@ -1,0 +1,20 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.example.smartoffice";
+option java_outer_classname = "SmartTemperatureControlProto";
+
+service SmartTemperatureControl {
+  rpc SetTemperature(TemperatureRequest) returns (TemperatureResponse);
+  rpc GetTemperature(TemperatureRequest) returns (TemperatureResponse);
+}
+
+message TemperatureRequest {
+  string workArea = 1;
+  float temperature = 2;
+}
+
+message TemperatureResponse {
+  string message = 1;
+  float currentTemperature = 2;
+}
