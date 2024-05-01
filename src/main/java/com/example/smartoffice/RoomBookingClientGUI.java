@@ -12,7 +12,6 @@ import javafx.stage.Stage;
 
 import java.time.DayOfWeek;
 import java.time.LocalDate;
-// import java.time.LocalTime;
 import java.util.Arrays;
 import java.util.List;
 
@@ -21,6 +20,8 @@ public class RoomBookingClientGUI extends Application {
     private RoomBookingGrpc.RoomBookingBlockingStub stub;
     private ManagedChannel channel;
     private TextArea outputArea;
+    private ComboBox<String> roomTypeComboBox;
+    private GridPane grid;
 
     // Room types
     private enum RoomType {CONFERENCE_ROOM, MEETING_ROOM}
@@ -36,7 +37,7 @@ public class RoomBookingClientGUI extends Application {
         stub = RoomBookingGrpc.newBlockingStub(channel);
 
         // Set up the UI components
-        GridPane grid = new GridPane();
+        grid = new GridPane();
         grid.setPadding(new Insets(20));
         grid.setHgap(10);
         grid.setVgap(10);
@@ -53,7 +54,7 @@ public class RoomBookingClientGUI extends Application {
         // Create the scene and set it on the stage
         Scene scene = new Scene(grid);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Room Booking Service");
+        primaryStage.setTitle("Room Booking Service by Syamil");
         primaryStage.show();
 
         // Shutdown the channel when the window is closed
@@ -92,20 +93,22 @@ public class RoomBookingClientGUI extends Application {
                 }
             }
         });
+
+        // Add room type selection for booking
+        List<String> roomTypes = Arrays.asList("Conference Room Dublin", "Conference Room Cork", "Conference Room Galway", "Meeting Room Limerick", "Meeting Room Waterford");
+        roomTypeComboBox = new ComboBox<>();
+        roomTypeComboBox.getItems().addAll(roomTypes);
+        roomTypeComboBox.setValue("Choose room type");
+        grid.add(new Label("Select Room:"), 0, 2);
+        grid.add(roomTypeComboBox, 1, 2);
     }
 
     private void bookRoom() {
-        // Room type selection
-        List<String> roomTypes = Arrays.asList("Conference Room", "Meeting Room");
-        ChoiceDialog<String> roomTypeDialog = new ChoiceDialog<>(roomTypes.get(0), roomTypes);
-        roomTypeDialog.setTitle("Room Type Selection");
-        roomTypeDialog.setHeaderText("Select Room Type:");
-        roomTypeDialog.setContentText("Choose room type:");
-
         // Get the selected room type
-        String selectedRoomType = roomTypeDialog.showAndWait().orElse(null);
-        if (selectedRoomType == null) {
-            return; // User canceled the dialog
+        String selectedRoomType = roomTypeComboBox.getValue();
+        if (selectedRoomType.equals("Choose room type")) {
+            showErrorDialog("Notice", "Please select the room that you want to book.");
+            return;
         }
 
         // Date and time selection
@@ -213,12 +216,12 @@ public class RoomBookingClientGUI extends Application {
             BookRoomResponse response = stub.bookRoom(request);
             if (response != null) {
                 outputArea.appendText("Booking ID: " + response.getBookingId() + "\n");
-                outputArea.appendText("Message: " + response.getMessage() + "\n");
+                outputArea.appendText("Server Message: " + response.getMessage() + "\n");
             } else {
                 showErrorDialog("Booking Failed", "Failed to book the room. Please try again later.");
             }
         } catch (StatusRuntimeException e) {
-            showErrorDialog("Server Error", "Failed to communicate with the server. Please provide a valid booking ID (case sensitive).");
+            showErrorDialog("Server Error", "Failed to communicate with the server. Please try again.");
         }
     }
 
@@ -249,7 +252,7 @@ public class RoomBookingClientGUI extends Application {
                 outputArea.appendText("End Time: " + response.getEndTime() + "\n");
                 outputArea.appendText("Employee Name: " + response.getEmployeeName() + "\n");
                 outputArea.appendText("Employee ID: " + response.getEmployeeId() + "\n");
-                outputArea.appendText("Message: " + response.getMessage() + "\n");
+                outputArea.appendText("Server Message: " + response.getMessage() + "\n");
             } else {
                 showErrorDialog("Booking Details Not Found", "No booking found with the provided ID.");
             }

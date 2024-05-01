@@ -3,13 +3,9 @@ package com.example.smartoffice;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
-// import com.example.smartoffice.LightRequest;
-// import com.example.smartoffice.LightResponse;
-// import com.example.smartoffice.TurnOnWithUserInputRequest;
-// import com.example.smartoffice.TurnOffWithUserInputRequest;
-
 public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
 
+    // Override method for turning on lights
     @Override
     public void turnOn(LightRequest request, StreamObserver<LightResponse> responseObserver) {
         // Dummy implementation
@@ -20,6 +16,7 @@ public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
         responseObserver.onCompleted();
     }
 
+    // Override method for turning off lights
     @Override
     public void turnOff(LightRequest request, StreamObserver<LightResponse> responseObserver) {
         // Dummy implementation
@@ -30,6 +27,7 @@ public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
         responseObserver.onCompleted();
     }
 
+    // Override method for turning on lights with user input
     @Override
     public void turnOnWithUserInput(TurnOnWithUserInputRequest request, StreamObserver<LightResponse> responseObserver) {
         // Get user input for workspace
@@ -51,6 +49,7 @@ public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
         responseObserver.onCompleted();
     }
 
+    // Override method for turning off lights with user input
     @Override
     public void turnOffWithUserInput(TurnOffWithUserInputRequest request, StreamObserver<LightResponse> responseObserver) {
         // Get user input for workspace
@@ -74,6 +73,7 @@ public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
 
     // Validate workspace
     private boolean isValidWorkspace(String workspaceId) {
+        // List of valid workspace IDs
         return workspaceId.equals("Conference Room Dublin") ||
                 workspaceId.equals("Conference Room Cork") ||
                 workspaceId.equals("Conference Room Galway") ||

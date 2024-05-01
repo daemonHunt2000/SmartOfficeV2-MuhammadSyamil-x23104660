@@ -2,177 +2,112 @@ package com.example.smartoffice;
 
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
-import java.util.Scanner;
+import javafx.application.Application;
+import javafx.geometry.Insets;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.Label;
+import javafx.scene.layout.GridPane;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
 
-public class SmartLightClient {
+public class SmartLightClient extends Application {
+
+    private SmartLightGrpc.SmartLightBlockingStub stub;
+    private ManagedChannel channel;
+    private Label responseLabel;
+
     public static void main(String[] args) {
-        // Create a scanner for user input
-        Scanner scanner = new Scanner(System.in);
-
-        boolean exitService = false;
-
-        while (!exitService) {
-            System.out.println("Welcome to the Smart Light Service!");
-            System.out.println("Select an option:");
-            System.out.println("1. Perform Smart Light actions");
-            System.out.println("2. Quit the service");
-            System.out.print("Enter the number corresponding to your choice: ");
-
-            // Read the user's choice
-            int serviceChoice;
-            if (scanner.hasNextInt()) {
-                serviceChoice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline character
-            } else {
-                System.out.println("Invalid input. Please enter a number.");
-                scanner.nextLine(); // Clear invalid input
-                continue;
-            }
-
-            switch (serviceChoice) {
-                case 1:
-                    // Perform Smart Light actions
-                    performSmartLightActions();
-                    break;
-                case 2:
-                    // Quit the service
-                    exitService = true;
-                    break;
-                default:
-                    System.out.println("Invalid choice. Please enter 1 or 2.");
-            }
-        }
-
-        System.out.println("Thank you for using the Smart Light Service!");
+        launch(args);
     }
 
-    private static void performSmartLightActions() {
+    @Override
+    public void start(Stage primaryStage) {
         // Create a channel to the server
-        ManagedChannel channel = ManagedChannelBuilder.forAddress("localhost", 9090)
+        channel = ManagedChannelBuilder.forAddress("localhost", 9090)
                 .usePlaintext()
                 .build();
 
         // Create a stub for the SmartLight service
-        SmartLightGrpc.SmartLightBlockingStub stub = SmartLightGrpc.newBlockingStub(channel);
+        stub = SmartLightGrpc.newBlockingStub(channel);
 
-        // Create a scanner for user input
-        Scanner scanner = new Scanner(System.in);
+        primaryStage.setTitle("Smart Light Client by Syamil");
 
-        boolean exit = false;
+        GridPane gridPane = new GridPane();
+        gridPane.setPadding(new Insets(10, 10, 10, 10));
+        gridPane.setVgap(8);
+        gridPane.setHgap(10);
 
-        while (!exit) {
-            int actionChoice = 0;
+        // Workspace selection
+        ComboBox<String> workspaceComboBox = new ComboBox<>();
+        workspaceComboBox.getItems().addAll(
+                "Conference Room Dublin",
+                "Conference Room Cork",
+                "Conference Room Galway",
+                "Meeting Room Limerick",
+                "Meeting Room Waterford",
+                "Server Room",
+                "Cafeteria"
+        );
+        workspaceComboBox.setPromptText("Select Workspace");
+        GridPane.setConstraints(workspaceComboBox, 0, 0);
 
-            // Prompt the user to choose action
-            while (actionChoice != 1 && actionChoice != 2) {
-                System.out.println("Choose an action:");
-                System.out.println("1. Turn On Lights");
-                System.out.println("2. Turn Off Lights");
-                System.out.print("Enter the number corresponding to the action: ");
+        // Action selection
+        Button turnOnButton = new Button("Turn On Lights");
+        Button turnOffButton = new Button("Turn Off Lights");
+        Button exitButton = new Button("Exit Client");
+        VBox actionButtons = new VBox(10);
+        actionButtons.getChildren().addAll(turnOnButton, turnOffButton, exitButton);
+        GridPane.setConstraints(actionButtons, 0, 1);
 
-                // Read the user's action choice
-                if (!scanner.hasNextInt()) {
-                    System.out.println("Invalid input. Please enter a number.");
-                    scanner.nextLine(); // Clear invalid input
-                    continue;
-                }
-                actionChoice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline character
+        // Response label
+        responseLabel = new Label();
+        GridPane.setConstraints(responseLabel, 0, 2);
 
-                // Validate action choice
-                if (actionChoice != 1 && actionChoice != 2) {
-                    System.out.println("Invalid choice. Please enter 1 or 2.");
-                }
-            }
+        gridPane.getChildren().addAll(workspaceComboBox, actionButtons, responseLabel);
 
-            String workspace = null;
-            while (workspace == null) {
-                System.out.println("Select a workspace:");
-                System.out.println("1. Conference Room Dublin");
-                System.out.println("2. Conference Room Cork");
-                System.out.println("3. Conference Room Galway");
-                System.out.println("4. Meeting Room Limerick");
-                System.out.println("5. Meeting Room Waterford");
-                System.out.println("6. Server Room");
-                System.out.println("7. Cafeteria");
-                System.out.print("Enter the number corresponding to the workspace: ");
+        turnOnButton.setOnAction(e -> performTurnOn(workspaceComboBox.getValue()));
+        turnOffButton.setOnAction(e -> performTurnOff(workspaceComboBox.getValue()));
+        exitButton.setOnAction(e -> stopClient());
 
-                // Read the user's workspace choice
-                if (!scanner.hasNextInt()) {
-                    System.out.println("Invalid input. Please enter a number.");
-                    scanner.nextLine(); // Clear invalid input
-                    continue;
-                }
-                int workspaceChoice = scanner.nextInt();
-                scanner.nextLine(); // Consume newline character
-
-                // Map the user's choice to the workspace name
-                switch (workspaceChoice) {
-                    case 1:
-                        workspace = "Conference Room Dublin";
-                        break;
-                    case 2:
-                        workspace = "Conference Room Cork";
-                        break;
-                    case 3:
-                        workspace = "Conference Room Galway";
-                        break;
-                    case 4:
-                        workspace = "Meeting Room Limerick";
-                        break;
-                    case 5:
-                        workspace = "Meeting Room Waterford";
-                        break;
-                    case 6:
-                        workspace = "Server Room";
-                        break;
-                    case 7:
-                        workspace = "Cafeteria";
-                        break;
-                    default:
-                        System.out.println("Invalid choice. Please enter a number between 1 and 7.");
-                }
-            }
-
-            // Perform the selected action
-            if (actionChoice == 1) {
-                performTurnOn(stub, workspace);
-            } else {
-                performTurnOff(stub, workspace);
-            }
-
-            // Ask if the user wants to continue
-            String continueChoice = "";
-            while (!continueChoice.equalsIgnoreCase("yes") && !continueChoice.equalsIgnoreCase("no")) {
-                System.out.print("Do you want to perform another action? (yes/no): ");
-                continueChoice = scanner.nextLine().trim();
-                if (!continueChoice.equalsIgnoreCase("yes") && !continueChoice.equalsIgnoreCase("no")) {
-                    System.out.println("Invalid choice. Please enter 'yes' or 'no'.");
-                }
-            }
-
-            exit = continueChoice.equalsIgnoreCase("no");
-        }
-
-        // Shutdown the channel
-        channel.shutdown();
+        Scene scene = new Scene(gridPane, 300, 200);
+        primaryStage.setScene(scene);
+        primaryStage.show();
     }
 
-    private static void performTurnOn(SmartLightGrpc.SmartLightBlockingStub stub, String workspace) {
+    private void performTurnOn(String workspace) {
         // Send a request to turn on the lights for the selected workspace
         LightRequest request = LightRequest.newBuilder()
                 .setWorkspaceId(workspace)
                 .build();
         LightResponse response = stub.turnOn(request);
-        System.out.println("Response: " + response.getStatus());
+        updateResponse(response.getStatus());
     }
 
-    private static void performTurnOff(SmartLightGrpc.SmartLightBlockingStub stub, String workspace) {
+    private void performTurnOff(String workspace) {
         // Send a request to turn off the lights for the selected workspace
         LightRequest request = LightRequest.newBuilder()
                 .setWorkspaceId(workspace)
                 .build();
         LightResponse response = stub.turnOff(request);
-        System.out.println("Response: " + response.getStatus());
+        updateResponse(response.getStatus());
+    }
+
+    // Update response label with the given message
+    private void updateResponse(String message) {
+        responseLabel.setText(message);
+    }
+
+    private void stopClient() {
+        // Shutdown the channel when the client is closed
+        channel.shutdown();
+        System.exit(0);
+    }
+
+    @Override
+    public void stop() {
+        // Shutdown the channel when the application is closed
+        channel.shutdown();
     }
 }

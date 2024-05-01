@@ -21,6 +21,7 @@ public class BookingDetails {
      * @param employeeId The ID of the employee making the booking
      */
     public BookingDetails(String roomType, String date, String startTime, String endTime, String employeeName, String employeeId) {
+        // Initialize booking details
         this.roomType = roomType;
         this.date = date;
         this.startTime = startTime;
