@@ -1,3 +1,11 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+SmartLightServer.java
+@author Muhammad Syamil (x23104660)
+21/04/2024
+*/
+
+
 package com.example.smartoffice;
 
 import io.grpc.Server;
@@ -8,18 +16,21 @@ import java.io.IOException;
 public class SmartLightServer {
 
     public static void main(String[] args) throws IOException, InterruptedException {
-        // Initialize a gRPC server on port 9090
+
+        // Initializes a gRPC server on port 9090
         Server server = ServerBuilder.forPort(9090)
-                .addService(new SmartLightServiceImpl()) // Add SmartLight service implementation
+
+                // Adds the SmartLight service implementation
+                .addService(new SmartLightServiceImpl())
                 .build();
 
-        // Start the server
+        // Starts the server
         server.start();
 
-        // Print a message indicating that the server has started
+        // Prints a message indicating that the server has started
         System.out.println("Smart Light Server started on port 9090");
 
-        // Wait for the server to shutdown (optional)
+        // Waits for the server to shutdown (optional)
         server.awaitTermination();
     }
 }

@@ -1,3 +1,11 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+module-info.java
+@author Muhammad Syamil (x23104660)
+24/04/2024
+*/
+
+
 module SmartOfficeV2 {
     requires io.grpc;
     requires io.grpc.stub;

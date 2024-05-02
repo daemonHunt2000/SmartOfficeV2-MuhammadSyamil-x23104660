@@ -1,3 +1,11 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+SmartLightClient.java
+@author Muhammad Syamil (x23104660)
+21/04/2024
+*/
+
+
 package com.example.smartoffice;
 
 import io.grpc.ManagedChannel;
@@ -12,6 +20,9 @@ import javafx.scene.layout.GridPane;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
+
+
+
 public class SmartLightClient extends Application {
 
     private SmartLightGrpc.SmartLightBlockingStub stub;
@@ -24,12 +35,13 @@ public class SmartLightClient extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Create a channel to the server
+
+        // Creates a channel for the server
         channel = ManagedChannelBuilder.forAddress("localhost", 9090)
                 .usePlaintext()
                 .build();
 
-        // Create a stub for the SmartLight service
+        // Creates a stub for the SmartLight service
         stub = SmartLightGrpc.newBlockingStub(channel);
 
         primaryStage.setTitle("Smart Light Client by Syamil");
@@ -39,7 +51,8 @@ public class SmartLightClient extends Application {
         gridPane.setVgap(8);
         gridPane.setHgap(10);
 
-        // Workspace selection
+
+        // For Workspace Selection
         ComboBox<String> workspaceComboBox = new ComboBox<>();
         workspaceComboBox.getItems().addAll(
                 "Conference Room Dublin",
@@ -53,7 +66,8 @@ public class SmartLightClient extends Application {
         workspaceComboBox.setPromptText("Select Workspace");
         GridPane.setConstraints(workspaceComboBox, 0, 0);
 
-        // Action selection
+
+        // For Action Selection
         Button turnOnButton = new Button("Turn On Lights");
         Button turnOffButton = new Button("Turn Off Lights");
         Button exitButton = new Button("Exit Client");
@@ -61,7 +75,8 @@ public class SmartLightClient extends Application {
         actionButtons.getChildren().addAll(turnOnButton, turnOffButton, exitButton);
         GridPane.setConstraints(actionButtons, 0, 1);
 
-        // Response label
+
+        // Response labels
         responseLabel = new Label();
         GridPane.setConstraints(responseLabel, 0, 2);
 
@@ -77,7 +92,8 @@ public class SmartLightClient extends Application {
     }
 
     private void performTurnOn(String workspace) {
-        // Send a request to turn on the lights for the selected workspace
+
+        // Sends a request to turn on the lights for the selected workspace
         LightRequest request = LightRequest.newBuilder()
                 .setWorkspaceId(workspace)
                 .build();
@@ -86,7 +102,8 @@ public class SmartLightClient extends Application {
     }
 
     private void performTurnOff(String workspace) {
-        // Send a request to turn off the lights for the selected workspace
+
+        // Sends a request to turn off the lights for the selected workspace
         LightRequest request = LightRequest.newBuilder()
                 .setWorkspaceId(workspace)
                 .build();
@@ -94,20 +111,22 @@ public class SmartLightClient extends Application {
         updateResponse(response.getStatus());
     }
 
-    // Update response label with the given message
+    // Updates response label with the given message
     private void updateResponse(String message) {
         responseLabel.setText(message);
     }
 
     private void stopClient() {
-        // Shutdown the channel when the client is closed
+
+        // Shutdowns the channel when the smart light client is closed
         channel.shutdown();
         System.exit(0);
     }
 
     @Override
     public void stop() {
-        // Shutdown the channel when the application is closed
+
+        // Shutdowns the channel when the application is closed
         channel.shutdown();
     }
 }

@@ -1,14 +1,26 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+SmartLightServiceImpl.java
+@author Muhammad Syamil (x23104660)
+21/04/2024
+*/
+
+
 package com.example.smartoffice;
 
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
+
+
 public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
 
-    // Override method for turning on lights
+
+    // Override method for turning on the lights
     @Override
     public void turnOn(LightRequest request, StreamObserver<LightResponse> responseObserver) {
-        // Dummy implementation
+
+        // Dummy implementation for turn on function
         String workspaceId = request.getWorkspaceId();
         String status = "Lights turned on for workspace: " + workspaceId;
         LightResponse response = LightResponse.newBuilder().setStatus(status).build();
@@ -16,10 +28,11 @@ public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
         responseObserver.onCompleted();
     }
 
-    // Override method for turning off lights
+    // Override method for turning off the lights
     @Override
     public void turnOff(LightRequest request, StreamObserver<LightResponse> responseObserver) {
-        // Dummy implementation
+
+        // Dummy implementation for turn off function
         String workspaceId = request.getWorkspaceId();
         String status = "Lights turned off for workspace: " + workspaceId;
         LightResponse response = LightResponse.newBuilder().setStatus(status).build();
@@ -27,53 +40,58 @@ public class SmartLightServiceImpl extends SmartLightGrpc.SmartLightImplBase {
         responseObserver.onCompleted();
     }
 
-    // Override method for turning on lights with user input
+    // Override method for turning on lights with the input from user
     @Override
     public void turnOnWithUserInput(TurnOnWithUserInputRequest request, StreamObserver<LightResponse> responseObserver) {
-        // Get user input for workspace
+
+        // Gets the user input for workspace
         String workspaceId = request.getWorkspaceId();
 
-        // Validate workspace
+        // Validates workspace
         if (!isValidWorkspace(workspaceId)) {
-            // Send error response
+
+            // Sends error response
             responseObserver.onError(Status.INVALID_ARGUMENT
                     .withDescription("Invalid workspace: " + workspaceId)
                     .asRuntimeException());
             return;
         }
 
-        // Dummy implementation
+        // Dummy implementation for turn on function
         String status = "Lights turned on for workspace: " + workspaceId;
         LightResponse response = LightResponse.newBuilder().setStatus(status).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
-    // Override method for turning off lights with user input
+    // Overrides the method for turning off lights with user input
     @Override
     public void turnOffWithUserInput(TurnOffWithUserInputRequest request, StreamObserver<LightResponse> responseObserver) {
-        // Get user input for workspace
+
+        // Gets user input for workspace
         String workspaceId = request.getWorkspaceId();
 
-        // Validate workspace
+        // Validates workspace
         if (!isValidWorkspace(workspaceId)) {
-            // Send error response
+
+            // Sends error response
             responseObserver.onError(Status.INVALID_ARGUMENT
                     .withDescription("Invalid workspace: " + workspaceId)
                     .asRuntimeException());
             return;
         }
 
-        // Dummy implementation
+        // Dummy implementation for turn off function
         String status = "Lights turned off for workspace: " + workspaceId;
         LightResponse response = LightResponse.newBuilder().setStatus(status).build();
         responseObserver.onNext(response);
         responseObserver.onCompleted();
     }
 
-    // Validate workspace
+    // Validates workspace
     private boolean isValidWorkspace(String workspaceId) {
-        // List of valid workspace IDs
+
+        // Lists of valid workspace IDs
         return workspaceId.equals("Conference Room Dublin") ||
                 workspaceId.equals("Conference Room Cork") ||
                 workspaceId.equals("Conference Room Galway") ||

@@ -1,3 +1,11 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+RoomBookingServiceImpl.java
+@author Muhammad Syamil (x23104660)
+24/04/2024
+*/
+
+
 package com.example.smartoffice;
 
 import io.grpc.Status;
@@ -6,14 +14,16 @@ import io.grpc.stub.StreamObserver;
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase {
 
-    // Map to store room bookings
+    // Map to store the room bookings
     private final Map<String, BookingDetails> bookings = new HashMap<>();
 
     @Override
     public void bookRoom(BookRoomRequest request, StreamObserver<BookRoomResponse> responseObserver) {
-        // Get booking details from the request
+
+        // Gets the booking details from the requests
         String roomType = request.getRoomType();
         String date = request.getDate();
         String startTime = request.getStartTime();
@@ -21,7 +31,7 @@ public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase 
         String employeeName = request.getEmployeeName();
         String employeeId = request.getEmployeeId();
 
-        // Validate the requested time
+        // Validates the requested time
         if (!isValidTime(startTime, endTime)) {
             responseObserver.onError(Status.INVALID_ARGUMENT
                     .withDescription("Invalid booking time. Please book within working hours (9am - 6pm).")
@@ -29,18 +39,19 @@ public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase 
             return;
         }
 
-        // Check room availability
+        // Checks for room availability
         if (isRoomAvailable(roomType, date, startTime, endTime)) {
-            // Generate a unique booking ID
+
+            // Generates a unique booking ID
             String bookingId = generateBookingId();
 
-            // Create booking details object
+            // Creates booking details object
             BookingDetails bookingDetails = new BookingDetails(roomType, date, startTime, endTime, employeeName, employeeId);
 
-            // Store booking details
+            // Stores booking details
             bookings.put(bookingId, bookingDetails);
 
-            // Send response with booking ID
+            // Sends response with the booking ID
             BookRoomResponse response = BookRoomResponse.newBuilder()
                     .setBookingId(bookingId)
                     .setMessage("Room booked successfully.")
@@ -48,7 +59,8 @@ public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase 
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } else {
-            // Room not available
+
+            // 'Room is not available' response
             responseObserver.onError(Status.INVALID_ARGUMENT
                     .withDescription("Room is not available for the requested time.")
                     .asRuntimeException());
@@ -57,22 +69,25 @@ public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase 
 
     @Override
     public void cancelBooking(CancelBookingRequest request, StreamObserver<CancelBookingResponse> responseObserver) {
-        // Get booking ID from request
+
+        // Gets booking ID from requests
         String bookingId = request.getBookingId();
 
-        // Check if booking ID exists
+        // Checks if a booking ID exists
         if (bookings.containsKey(bookingId)) {
-            // Remove booking
+
+            // Removes booking
             bookings.remove(bookingId);
 
-            // Send response
+            // Sends response
             CancelBookingResponse response = CancelBookingResponse.newBuilder()
                     .setMessage("Booking canceled successfully.")
                     .build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
         } else {
-            // Booking ID not found
+
+            // Booking ID not found response
             responseObserver.onError(Status.NOT_FOUND
                     .withDescription("Booking not found for ID: " + bookingId)
                     .asRuntimeException());
@@ -83,12 +98,14 @@ public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase 
 
     @Override
     public void viewBooking(ViewBookingRequest request, StreamObserver<ViewBookingResponse> responseObserver) {
-        // Get booking ID from request
+
+        // Gets booking ID from requests
         String bookingId = request.getBookingId();
 
-        // Check if booking ID exists
+        // Checks if booking ID exists
         if (bookings.containsKey(bookingId)) {
-            // Get booking details
+
+            // Gets booking details
             BookingDetails bookingDetails = bookings.get(bookingId);
 
             // Build response
@@ -103,8 +120,9 @@ public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase 
                     .build();
             responseObserver.onNext(response);
             responseObserver.onCompleted();
+
         } else {
-            // Booking ID not found
+            // Booking ID is not found response
             responseObserver.onError(Status.NOT_FOUND
                     .withDescription("Booking not found for ID: " + bookingId)
                     .asRuntimeException());
@@ -118,15 +136,11 @@ public class RoomBookingServiceImpl extends RoomBookingGrpc.RoomBookingImplBase 
 
     // Method to validate the booking time
     private boolean isValidTime(String startTime, String endTime) {
-
-        // For now, assuming all times are valid
         return true;
     }
 
-    // Method to check room availability
+    // Method to check the room availability
     private boolean isRoomAvailable(String roomType, String date, String startTime, String endTime) {
-        // Implement your room availability logic here
-        // For now, assuming room is always available
         return true;
     }
 }

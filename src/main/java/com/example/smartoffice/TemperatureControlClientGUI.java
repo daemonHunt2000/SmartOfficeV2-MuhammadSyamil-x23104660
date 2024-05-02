@@ -1,3 +1,11 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+TemperatureControlClientGUI.java
+@author Muhammad Syamil (x23104660)
+26/04/2024
+*/
+
+
 package com.example.smartoffice;
 
 import io.grpc.ManagedChannel;
@@ -20,32 +28,34 @@ public class TemperatureControlClientGUI extends Application {
     private TextArea outputArea;
     private ComboBox<String> workAreaComboBox;
 
+
     @Override
     public void start(Stage primaryStage) {
-        // Create a channel to the server
+
+        // Creates a channel to the server - 9092
         channel = ManagedChannelBuilder.forAddress("localhost", 9092)
                 .usePlaintext()
                 .build();
 
-        // Create a stub for the SmartTemperatureControl service
+        // Creates a stub for the SmartTemperatureControl service
         stub = SmartTemperatureControlGrpc.newBlockingStub(channel);
 
-        // Set up the UI components
+        // Sets up the UI components
         GridPane grid = new GridPane();
         grid.setPadding(new Insets(20));
         grid.setHgap(10);
         grid.setVgap(10);
 
-        // Add UI components for temperature control
+        // Adds UI components for temperature control function
         addTemperatureControlOptions(grid);
 
-        // Add output area
+        // Adds output area
         outputArea = new TextArea();
         outputArea.setEditable(false);
         outputArea.setPrefRowCount(10);
         grid.add(outputArea, 0, 4, 2, 1);
 
-        // Add exit button
+        // Adds exit button for the interface
         Button exitButton = new Button("Exit");
         exitButton.setOnAction(event -> {
             channel.shutdown();
@@ -53,26 +63,28 @@ public class TemperatureControlClientGUI extends Application {
         });
         grid.add(exitButton, 0, 5, 2, 1);
 
-        // Create the scene and set it on the stage
+        // Creates the scene and sets it on the stage
         Scene scene = new Scene(grid);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("Smart Temperature Control Service");
+        primaryStage.setTitle("Smart Temperature Control Service by Syamil");
         primaryStage.show();
 
-        // Shutdown the channel when the window is closed
+        // Shutdowns the channel when the window of the interface is closed
         primaryStage.setOnCloseRequest(event -> {
             channel.shutdown();
             System.exit(0);
         });
     }
 
+    // Method to add the temperature control options to the UI
     private void addTemperatureControlOptions(GridPane grid) {
+
         // Temperature Control Section
         Label temperatureControlLabel = new Label("Smart Temperature Control Service");
         temperatureControlLabel.setStyle("-fx-font-weight: bold");
         grid.add(temperatureControlLabel, 0, 0, 2, 1);
 
-        // Add dropdown menu for work area selection
+        // Adds a dropdown menu for the work area selection
         List<String> workAreas = Arrays.asList("Conference Room Dublin", "Conference Room Cork", "Conference Room Galway",
                 "Meeting Room Limerick", "Meeting Room Waterford", "General Workstations", "Cafeteria");
         workAreaComboBox = new ComboBox<>();
@@ -81,19 +93,19 @@ public class TemperatureControlClientGUI extends Application {
         grid.add(new Label("Select Work Area:"), 0, 1);
         grid.add(workAreaComboBox, 1, 1);
 
-        // Add temperature input field
+        // Adds temperature input field
         TextField temperatureField = new TextField();
         temperatureField.setPromptText("Enter Temperature");
         grid.add(new Label("Set Temperature (°C):"), 0, 2);
         grid.add(temperatureField, 1, 2);
 
-        // Add buttons for setting and getting temperature
+        // Adds buttons for setting and getting the temperature
         Button setTemperatureButton = new Button("Set Temperature");
         Button getTemperatureButton = new Button("Get Temperature");
         grid.add(setTemperatureButton, 0, 3);
         grid.add(getTemperatureButton, 1, 3);
 
-        // Set action for setting temperature button
+        // Sets the action for setting temperature button
         setTemperatureButton.setOnAction(event -> {
             String workArea = workAreaComboBox.getValue();
             String temperatureStr = temperatureField.getText();
@@ -109,7 +121,7 @@ public class TemperatureControlClientGUI extends Application {
             }
         });
 
-        // Set action for getting temperature button
+        // Sets the action for getting temperature button
         getTemperatureButton.setOnAction(event -> {
             String workArea = workAreaComboBox.getValue();
             if (workArea == null || workArea.isEmpty()) {
@@ -120,6 +132,7 @@ public class TemperatureControlClientGUI extends Application {
         });
     }
 
+    // Method to set the temperature for a work area
     private void setTemperature(String workArea, float temperature) {
         TemperatureRequest request = TemperatureRequest.newBuilder()
                 .setWorkArea(workArea)
@@ -133,6 +146,7 @@ public class TemperatureControlClientGUI extends Application {
         }
     }
 
+    // Method to get the temperature for a work area
     private void getTemperature(String workArea) {
         TemperatureRequest request = TemperatureRequest.newBuilder()
                 .setWorkArea(workArea)
@@ -145,6 +159,7 @@ public class TemperatureControlClientGUI extends Application {
         }
     }
 
+    // Method to show error dialog
     private void showErrorDialog(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
         alert.setTitle(title);
@@ -153,6 +168,7 @@ public class TemperatureControlClientGUI extends Application {
         alert.showAndWait();
     }
 
+    // Main method to launch the application
     public static void main(String[] args) {
         launch(args);
     }

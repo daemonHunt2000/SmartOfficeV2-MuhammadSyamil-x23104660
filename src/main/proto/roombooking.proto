@@ -1,3 +1,11 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+roombooking.proto
+@author Muhammad Syamil (x23104660)
+24/04/2024
+*/
+
+
 syntax = "proto3";
 
 package com.example.smartoffice;

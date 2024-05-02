@@ -1,8 +1,16 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+BookingDetails.java
+@author Muhammad Syamil (x23104660)
+24/04/2024
+*/
+
+
 package com.example.smartoffice;
 
-/**
- * Represents the details of a room booking.
- */
+/*
+Represents the details of a room booking.
+*/
 public class BookingDetails {
     private final String roomType; // Type of room to be booked (e.g., Conference Room, Meeting Room)
     private final String date; // Date of the booking
@@ -13,15 +21,18 @@ public class BookingDetails {
 
     /**
      * Constructs a new BookingDetails object with the given parameters.
-     * @param roomType The type of the room to be booked (e.g., Conference Room, Meeting Room)
+     * @param roomType The type of the room to be booked (e.g. Conference Room, Meeting Room)
      * @param date The date of the booking
      * @param startTime The start time of the booking
      * @param endTime The end time of the booking
      * @param employeeName The name of the employee making the booking
      * @param employeeId The ID of the employee making the booking
      */
+
+
     public BookingDetails(String roomType, String date, String startTime, String endTime, String employeeName, String employeeId) {
-        // Initialize booking details
+
+        // Initializes the booking details
         this.roomType = roomType;
         this.date = date;
         this.startTime = startTime;

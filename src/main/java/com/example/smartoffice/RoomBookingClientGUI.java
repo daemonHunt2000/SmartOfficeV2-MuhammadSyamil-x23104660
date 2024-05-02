@@ -1,3 +1,11 @@
+/*
+Smart Offices - CA Project of Distributed Systems
+RoomBookingClientGUI.java
+@author Muhammad Syamil (x23104660)
+24/04/2024
+*/
+
+
 package com.example.smartoffice;
 
 import io.grpc.ManagedChannel;
@@ -15,6 +23,8 @@ import java.time.LocalDate;
 import java.util.Arrays;
 import java.util.List;
 
+
+
 public class RoomBookingClientGUI extends Application {
 
     private RoomBookingGrpc.RoomBookingBlockingStub stub;
@@ -23,58 +33,62 @@ public class RoomBookingClientGUI extends Application {
     private ComboBox<String> roomTypeComboBox;
     private GridPane grid;
 
-    // Room types
+    // Room Types
     private enum RoomType {CONFERENCE_ROOM, MEETING_ROOM}
+
 
     @Override
     public void start(Stage primaryStage) {
-        // Create a channel to the server
-        channel = ManagedChannelBuilder.forAddress("localhost", 9090)
+
+        // Creates a channel for the server
+        channel = ManagedChannelBuilder.forAddress("localhost", 9091)
                 .usePlaintext()
                 .build();
 
         // Create a stub for the RoomBooking service
         stub = RoomBookingGrpc.newBlockingStub(channel);
 
-        // Set up the UI components
+        // Sets up the components of the UI
         grid = new GridPane();
         grid.setPadding(new Insets(20));
         grid.setHgap(10);
         grid.setVgap(10);
 
-        // Add UI components for room booking options
+        // Adds UI components for room booking options
         addRoomBookingOptions(grid);
 
-        // Add output area
+        // Adds the output area after a function is executed
         outputArea = new TextArea();
         outputArea.setEditable(false);
         outputArea.setPrefRowCount(10);
         grid.add(outputArea, 0, 6, 2, 1);
 
-        // Create the scene and set it on the stage
+        // Creates the scene and sets it onto the stage
         Scene scene = new Scene(grid);
         primaryStage.setScene(scene);
         primaryStage.setTitle("Room Booking Service by Syamil");
         primaryStage.show();
 
-        // Shutdown the channel when the window is closed
+        // Shutdowns the channel when the window is closed
         primaryStage.setOnCloseRequest(event -> channel.shutdown());
     }
 
+
     private void addRoomBookingOptions(GridPane grid) {
+
         // Room Booking Section
         Label roomBookingLabel = new Label("Room Booking Service");
         roomBookingLabel.setStyle("-fx-font-weight: bold");
         grid.add(roomBookingLabel, 0, 0, 2, 1);
 
-        // Create a dropdown menu for room booking options
+        // Creates a dropdown menu for room booking options
         ComboBox<String> bookingOptions = new ComboBox<>();
         bookingOptions.getItems().addAll("Book a Room", "View Booking Details", "Exit the Service");
         bookingOptions.setValue("Select an option");
         grid.add(new Label("Select Option:"), 0, 1);
         grid.add(bookingOptions, 1, 1);
 
-        // Add action listener to the dropdown menu
+        // Adds action listener to the dropdown menu
         bookingOptions.setOnAction(event -> {
             String selectedOption = bookingOptions.getSelectionModel().getSelectedItem();
             if (selectedOption != null) {
@@ -86,7 +100,8 @@ public class RoomBookingClientGUI extends Application {
                         viewBookingDetails();
                         break;
                     case "Exit the Service":
-                        // Close the application
+
+                        // Closes the application
                         channel.shutdown();
                         System.exit(0);
                         break;
@@ -94,7 +109,7 @@ public class RoomBookingClientGUI extends Application {
             }
         });
 
-        // Add room type selection for booking
+        // Adds room type selection for booking
         List<String> roomTypes = Arrays.asList("Conference Room Dublin", "Conference Room Cork", "Conference Room Galway", "Meeting Room Limerick", "Meeting Room Waterford");
         roomTypeComboBox = new ComboBox<>();
         roomTypeComboBox.getItems().addAll(roomTypes);
@@ -103,8 +118,10 @@ public class RoomBookingClientGUI extends Application {
         grid.add(roomTypeComboBox, 1, 2);
     }
 
+
     private void bookRoom() {
-        // Get the selected room type
+
+        // Gets the selected room type
         String selectedRoomType = roomTypeComboBox.getValue();
         if (selectedRoomType.equals("Choose room type")) {
             showErrorDialog("Notice", "Please select the room that you want to book.");
@@ -116,6 +133,7 @@ public class RoomBookingClientGUI extends Application {
         DatePicker datePicker = new DatePicker();
         datePicker.setValue(currentDate);
         datePicker.setDayCellFactory(datePicker1 -> new DateCell() {
+
             @Override
             public void updateItem(LocalDate item, boolean empty) {
                 super.updateItem(item, empty);
@@ -131,7 +149,7 @@ public class RoomBookingClientGUI extends Application {
             endTimeComboBox.getItems().add(i + ":00");
         }
 
-        // Create a dialog for date and time selection
+        // Creates a dialog for date and time selection
         GridPane dateTimeGrid = new GridPane();
         dateTimeGrid.setHgap(10);
         dateTimeGrid.setVgap(10);
@@ -146,11 +164,11 @@ public class RoomBookingClientGUI extends Application {
         dateTimeDialog.setTitle("Date and Time Selection");
         dateTimeDialog.getDialogPane().setContent(dateTimeGrid);
 
-        // Add buttons to the dialog
+        // Adds buttons to the dialog
         ButtonType bookButton = new ButtonType("Book", ButtonBar.ButtonData.OK_DONE);
         dateTimeDialog.getDialogPane().getButtonTypes().addAll(bookButton, ButtonType.CANCEL);
 
-        // Wait for user input
+        // Waits for the user input
         dateTimeDialog.setResultConverter(dialogButton -> {
             if (dialogButton == bookButton) {
                 LocalDate selectedDate = datePicker.getValue();
@@ -162,7 +180,7 @@ public class RoomBookingClientGUI extends Application {
                     return null;
                 }
 
-                // Perform validation
+                // Performs validation
                 return selectedDate.toString() + ";" + startTime + ";" + endTime;
             }
             return null;
@@ -170,7 +188,7 @@ public class RoomBookingClientGUI extends Application {
 
         String dateTimeResult = dateTimeDialog.showAndWait().orElse(null);
         if (dateTimeResult == null) {
-            return; // User canceled the dialog or input was invalid
+            return; // <-- User canceled the dialog or the input was invalid
         }
 
         String[] dateTimeParts = dateTimeResult.split(";");
@@ -178,7 +196,7 @@ public class RoomBookingClientGUI extends Application {
         String startTime = dateTimeParts[1];
         String endTime = dateTimeParts[2];
 
-        // Employee details input
+        // Employee Details input
         TextInputDialog employeeNameDialog = new TextInputDialog();
         employeeNameDialog.setTitle("Employee Name");
         employeeNameDialog.setHeaderText("Enter Your Name:");
@@ -201,7 +219,7 @@ public class RoomBookingClientGUI extends Application {
             return;
         }
 
-        // Create a request message
+        // Creates a request message
         BookRoomRequest request = BookRoomRequest.newBuilder()
                 .setRoomType(selectedRoomType)
                 .setDate(selectedDate.toString())
@@ -211,8 +229,10 @@ public class RoomBookingClientGUI extends Application {
                 .setEmployeeId(employeeId)
                 .build();
 
+
         try {
-            // Call the RPC and get the response
+
+            // Calls the RPC and gets the response
             BookRoomResponse response = stub.bookRoom(request);
             if (response != null) {
                 outputArea.appendText("Booking ID: " + response.getBookingId() + "\n");
@@ -225,8 +245,10 @@ public class RoomBookingClientGUI extends Application {
         }
     }
 
+
     private void viewBookingDetails() {
-        // Get booking ID from user input
+
+        // Gets booking ID from the user input
         TextInputDialog dialog = new TextInputDialog();
         dialog.setTitle("View Booking Details");
         dialog.setHeaderText("Enter Booking ID:");
@@ -234,16 +256,18 @@ public class RoomBookingClientGUI extends Application {
 
         String bookingId = dialog.showAndWait().orElse(null);
         if (bookingId == null || bookingId.isEmpty()) {
-            return; // User canceled the dialog or input was empty
+            return; // <-- User canceled the dialog or input was null
         }
 
-        // Create a request message
+        // Creates a request message
         ViewBookingRequest request = ViewBookingRequest.newBuilder()
                 .setBookingId(bookingId)
                 .build();
 
+
         try {
-            // Call the RPC and get the response
+
+            // Calls the RPC and gets the response
             ViewBookingResponse response = stub.viewBooking(request);
             if (response != null) {
                 outputArea.appendText("Room Type: " + response.getRoomType() + "\n");
