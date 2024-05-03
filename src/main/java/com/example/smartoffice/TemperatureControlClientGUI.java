@@ -115,11 +115,16 @@ public class TemperatureControlClientGUI extends Application {
             }
             try {
                 float temperature = Float.parseFloat(temperatureStr);
+                if (temperature < 16 || temperature > 30) {
+                    showErrorDialog("Error", "Temperature must be between 16°C and 30°C.");
+                    return;
+                }
                 setTemperature(workArea, temperature);
             } catch (NumberFormatException e) {
                 showErrorDialog("Error", "Please enter a valid temperature.");
             }
         });
+
 
         // Sets the action for getting temperature button
         getTemperatureButton.setOnAction(event -> {

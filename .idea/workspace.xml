@@ -4,22 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="Working Smart Temperature Control service for the Smart Office Environment (client side implementation).">
+    <list default="true" id="04e53e65-8765-4ab9-a932-01f36942d309" name="Changes" comment="FINAL COMMIT for my Smart Office environment (Muhammad Syamil - x23104660). Added author comments and further tidied up the code wherever possible.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/BookingDetails.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/BookingDetails.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingClientGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/RoomBookingServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartLightServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartTemperatureControlServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/SmartTemperatureControlServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/TemperatureControlClientGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/com/example/smartoffice/TemperatureControlClientGUI.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/module-info.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/module-info.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/SmartTemperatureControl.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/SmartTemperatureControl.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/roombooking.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/roombooking.proto" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/proto/smartlight.proto" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/proto/smartlight.proto" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -132,7 +119,8 @@
       <workItem from="1714154033516" duration="20321000" />
       <workItem from="1714387139214" duration="1856000" />
       <workItem from="1714569922720" duration="22581000" />
-      <workItem from="1714642747639" duration="12271000" />
+      <workItem from="1714642747639" duration="12393000" />
+      <workItem from="1714734064198" duration="589000" />
     </task>
     <task id="LOCAL-00001" summary="Smart Light service working">
       <option name="closed" value="true" />
@@ -198,7 +186,15 @@
       <option name="project" value="LOCAL" />
       <updated>1714602146769</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="FINAL COMMIT for my Smart Office environment (Muhammad Syamil - x23104660). Added author comments and further tidied up the code wherever possible.">
+      <option name="closed" value="true" />
+      <created>1714659252555</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1714659252555</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -214,6 +210,7 @@
     <MESSAGE value="Finally was able to make the Room Booking Service work. Had to simplify the service to just 3 functions after implementing the JavaFX GUI with appropriate validation checks. Tried to tidy up the codes in RoomBookingServiceImpl.java but after omitting a few lines, the client wasn't able to book new rooms so I just left those codes in eventhough they are redundant." />
     <MESSAGE value="Tidied up the codes for both the Smart Light Service &amp; Room Booking Service as well as adding comments. Also updated the types of workspaces in the Room Booking Service files to reflect the ones in the other two services. Also updated the Smart Light Client to have a JavaFX GUI." />
     <MESSAGE value="Working Smart Temperature Control service for the Smart Office Environment (client side implementation)." />
-    <option name="LAST_COMMIT_MESSAGE" value="Working Smart Temperature Control service for the Smart Office Environment (client side implementation)." />
+    <MESSAGE value="FINAL COMMIT for my Smart Office environment (Muhammad Syamil - x23104660). Added author comments and further tidied up the code wherever possible." />
+    <option name="LAST_COMMIT_MESSAGE" value="FINAL COMMIT for my Smart Office environment (Muhammad Syamil - x23104660). Added author comments and further tidied up the code wherever possible." />
   </component>
 </project>
